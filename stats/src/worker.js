@@ -39,7 +39,7 @@ export default {
 		let pages_results = await sql_query(pages_sql)
 
 		function is_watched_path(path) {
-			return !path.match( /(\.m3u8)/ )
+			return path.match( /(\.m3u8)/ )
 		}
 
 		
