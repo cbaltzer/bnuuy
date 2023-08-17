@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>bnuuy</title>
+    <script src="//cdn.jsdelivr.net/npm/hls.js@1"></script>
+</head>
+
+<body>
+    <h1>bnuuy</h1>
+    <pre>
+https://bnuuy.stream/assets/big_buck_bunny/index.m3u8
+    </pre>
+    <div>
+        <video id="video" controls width="800" heigh="450">
+        </video>
+        <script>
+            if (Hls.isSupported()) {
+                var video = document.getElementById('video');
+                var hls = new Hls();
+                hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                    console.log('video and hls.js are now bound together !');
+                });
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    console.log(
+                        'manifest loaded, found ' + data.levels.length + ' quality level'
+                    );
+                });
+
+                hls.loadSource('/assets/big_buck_bunny/index.m3u8');
+                hls.attachMedia(video);
+            }
+        </script>
+    </div>
+    <p>
+        <a href="https://bnuuy-dashboard.chris-baltzer.workers.dev">stats</a>
+    </p>
+    <p>
+        <a href="https://github.com/cbaltzer/bnuuy">source</a>
+    </p>
+</body>
+
+</html>

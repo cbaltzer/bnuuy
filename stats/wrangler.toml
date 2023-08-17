@@ -1,0 +1,3 @@
+name = "bnuuy-dashboard"
+main = "src/worker.js"
+compatibility_date = "2023-08-14"

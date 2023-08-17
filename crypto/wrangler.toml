@@ -1,0 +1,7 @@
+name = "bnuuy-crypto"
+main = "src/worker.js"
+compatibility_date = "2023-08-14"
+
+routes = [
+	{ pattern = "bnuuy.stream/assets/*", zone_name = "bnuuy.stream" }
+]

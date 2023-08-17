@@ -1,0 +1,11 @@
+name = "bnuuy-analytics"
+main = "src/worker.js"
+compatibility_date = "2023-08-14"
+
+routes = [
+	{ pattern = "bnuuy.stream/*", zone_name = "bnuuy.stream" }
+]
+
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "bnuuy_stats"
