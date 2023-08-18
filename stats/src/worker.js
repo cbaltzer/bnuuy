@@ -32,6 +32,7 @@ export default {
 				index1 AS path,
 				count() AS view_count
 			FROM bnuuy_stats
+			WHERE timestamp > NOW() - INTERVAL '7' DAY
 			GROUP BY path
 			FORMAT JSON
 		`;
@@ -46,7 +47,8 @@ export default {
 		let json = JSON.parse(pages_results);
 		let filtered = json.data.filter(entry => {
 			return is_watched_path(entry.path)
-		});
+		})
+		.sort((a,b) => b.view_count - a.view_count );
 
 		return new Response(JSON.stringify(filtered, null, 2));
 	},
