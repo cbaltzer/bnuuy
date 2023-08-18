@@ -15,6 +15,8 @@ https://bnuuy.stream/encrypted/big_buck_bunny/index.m3u8
 
 ## Components
 
+![](diagram.png)
+
 
 ### Web
 
