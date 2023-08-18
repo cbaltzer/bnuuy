@@ -10,8 +10,12 @@
 
 export default {
 	async fetch(request, env, ctx) {
+
+		await env.ANALYTICS.fetch(request);
+
 		const url = new URL(request.url);
 		const filename = url.pathname.split("/").slice(-1)[0];
+		const assetURL = request.url.replace("encrypted", "assets");
 
 		if (filename === "key.bin") {
 			let keypair = await Crypto.getKeyPair();
@@ -23,11 +27,13 @@ export default {
 		}
 
 		if (filename.match( /(\.m3u8)$/ )) {
-			let manifest_req = await fetch(request);
+			let manifest_req = await fetch(assetURL);
 			var manifest = await manifest_req.text();
 
 			let keypair = await Crypto.getKeyPair();
-			manifest = manifest.replace("{{iv}}", Crypto.utils.hexFromBytes(keypair.iv));
+			let xkeyNone = "#EXT-X-KEY:METHOD=NONE";
+			let xkeyAES = `#EXT-X-KEY:METHOD=AES-128,URI="key.bin",IV=0x${Crypto.utils.hexFromBytes(keypair.iv)}`;
+			manifest = manifest.replace(xkeyNone, xkeyAES);
 
 			return new Response(manifest, {
 				headers: {
@@ -38,7 +44,7 @@ export default {
 		}
 
 		if (filename.match( /(\.ts|\.fmp4)$/ )) {
-			let chunk_req = await fetch(request);
+			let chunk_req = await fetch(assetURL);
 			let chunk = await chunk_req.blob();
 			let buffer = await chunk.arrayBuffer();
 

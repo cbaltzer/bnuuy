@@ -3,5 +3,9 @@ main = "src/worker.js"
 compatibility_date = "2023-08-14"
 
 routes = [
-	{ pattern = "bnuuy.stream/assets/*", zone_name = "bnuuy.stream" }
+	{ pattern = "bnuuy.stream/encrypted/*", zone_name = "bnuuy.stream" }
+]
+
+services = [
+  { binding = "ANALYTICS", service = "bnuuy-analytics" }
 ]
